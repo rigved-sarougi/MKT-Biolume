@@ -45,23 +45,31 @@ st.write(f"**Total Products:** {total_products}")
 st.write(f"**Total Quantity Available:** {total_quantity}")
 st.write(f"**Average Price:** ₹{avg_price:.2f}")
 
-# Data Visualization
-st.subheader("Product Category Distribution")
-category_chart = alt.Chart(filtered_df).mark_bar().encode(
-    x=alt.X("Product Category", sort="-y", title="Category"),
-    y=alt.Y("Quantity", title="Quantity"),
-    color="Product Category"
+# Bar Graph: Quantity Sold per Product
+st.subheader("Quantity Sold per Product")
+bar_chart = alt.Chart(filtered_df).mark_bar().encode(
+    x=alt.X("Product Name", sort="-y", title="Product Name"),
+    y=alt.Y("Quantity", title="Quantity Sold"),
+    tooltip=["Product Name", "Quantity"],
+    color="Product Name"
+).properties(
+    width=700,
+    height=400
 )
-st.altair_chart(category_chart, use_container_width=True)
+st.altair_chart(bar_chart, use_container_width=True)
 
-st.subheader("Product Price vs Quantity")
-scatter_chart = alt.Chart(filtered_df).mark_circle(size=100).encode(
-    x=alt.X("Price", title="Price (₹)"),
-    y=alt.Y("Quantity", title="Quantity"),
-    tooltip=["Product Name", "Price", "Quantity"],
-    color="Product Category"
+# Pie Chart: Distribution of Product Categories
+st.subheader("Product Categories Distribution")
+category_distribution = filtered_df.groupby("Product Category")["Quantity"].sum().reset_index()
+pie_chart = alt.Chart(category_distribution).mark_arc(innerRadius=50).encode(
+    theta=alt.Theta("Quantity", title="Quantity", stack=True),
+    color=alt.Color("Product Category", title="Category"),
+    tooltip=["Product Category", "Quantity"]
+).properties(
+    width=400,
+    height=400
 )
-st.altair_chart(scatter_chart, use_container_width=True)
+st.altair_chart(pie_chart, use_container_width=True)
 
 # Display Data Table
 st.subheader("Filtered Data")
