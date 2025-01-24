@@ -42,7 +42,7 @@ avg_price = filtered_df["Price"].mean()
 
 st.subheader("Key Metrics")
 st.write(f"**Total Products:** {total_products}")
-st.write(f"**Total Quantity Available:** {total_quantity}")
+st.write(f"**Total Quantity:** {total_quantity}")
 
 
 # Bar Graph: Quantity Sold per Product
