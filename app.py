@@ -13,7 +13,7 @@ def load_data():
 df = load_data()
 
 # Dashboard Title
-st.title("MKT+Biolume Dashboard")
+st.title("Sales MKT+Biolume Dashboard")
 
 # Sidebar Filters
 st.sidebar.header("Filters")
