@@ -3,7 +3,7 @@ import pandas as pd
 import altair as alt
 
 # Load the data from the CSV file in the repository
-DATA_URL = "MKT+Biolume - Inventory System - Products McKingsTown - TP.csv"
+DATA_URL = "MKT+Biolume - Inventory System - TP.csv"
 
 @st.cache_data
 def load_data():
